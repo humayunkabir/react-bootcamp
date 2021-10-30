@@ -1,7 +1,7 @@
 const { useState, useEffect } = require('react');
 
 const usePagination = (items, perPageItems) => {
-  console.log(items, perPageItems);
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [currentPageItems, setCurrentPageItems] = useState(null);
   const [numberOfPages, setNumberOfPages] = useState(0);
 
@@ -13,18 +13,19 @@ const usePagination = (items, perPageItems) => {
   }, [items, perPageItems]);
 
   // next button
-  const goToNext = (currentPage) => {
-    console.log({ currentPage, numberOfPages });
+  const goToNext = () => {
+    goToPage(currentPageNumber + 1);
   };
 
   // perv button
-  const goToPrev = (currentPage) => {
-    console.log({ currentPage, numberOfPages });
+  const goToPrev = () => {
+    goToPage(currentPageNumber - 1);
   };
 
   // go to specific page
   const goToPage = (pageNumber) => {
     console.log({ pageNumber, numberOfPages });
+    setCurrentPageNumber(pageNumber);
     setCurrentPageItems(
       items.slice(perPageItems * (pageNumber - 1), perPageItems * pageNumber)
     );
@@ -33,6 +34,7 @@ const usePagination = (items, perPageItems) => {
   return {
     numberOfPages,
     currentPageItems,
+    currentPageNumber,
     goToNext,
     goToPrev,
     goToPage,

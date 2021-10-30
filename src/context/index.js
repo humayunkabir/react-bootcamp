@@ -60,7 +60,6 @@ const AppContext = ({ children }) => {
   };
 
   const handleSearch = (search) => {
-    console.log(search);
     let filteredUsers;
     if (search) {
       filteredUsers = [...users].filter(
@@ -70,7 +69,6 @@ const AppContext = ({ children }) => {
           website.includes(search)
       );
     } else {
-      console.log('Reset');
       setUsers(fetchedUsers);
       return;
     }
